@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="Basic Tutorial">
+    <flow SubFlow="false" name="Basic_TutorialFlow1" entity-id="8895bbb5-51fc-48fa-ad20-1c0efa20a42a">
+        <properties>
+            <property name="tracking:enable-default-events"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="processingStrategy2"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                <graphicalData x="19" y="142" width="68" height="171"/>
+                <properties>
+                    <property name="connector-ref"/>
+                    <property name="address"/>
+                    <property name="method"/>
+                    <property name="mimeType"/>
+                    <property name="encoding"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="httpLabel"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="path" value="*"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="password"/>
+                    <property name="keep-alive"/>
+                    <property name="port" value="8081"/>
+                    <property name="followRedirects"/>
+                    <property name="host" value="localhost"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="transformer-refs"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="user"/>
+                    <property name="contentType"/>
+                    <property name="responseTimeout"/>
+                </properties>
+            </endpoint>
+            <pattern name="Expression" type="org.mule.tooling.ui.modules.core.filter.Expression" entity-id="Expression#1">
+                <graphicalData x="147" y="142" width="69" height="69"/>
+                <properties>
+                    <property name="nullReturnsTrue"/>
+                    <property name="expression" value="#[message.inboundProperties.'http.request.uri' != '/favicon.ico']"/>
+                    <property name="customEvaluator"/>
+                    <property name="evaluator"/>
+                    <property name="auxiliary;index" value="3"/>
+                </properties>
+            </pattern>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
+                <graphicalData x="276" y="142" width="68" height="69"/>
+                <properties>
+                    <property name="level" value="INFO"/>
+                    <property name="message" value="Current path is #[message.inboundProperties.'http.request.path']"/>
+                    <property name="category"/>
+                    <property name="auxiliary;index" value="4"/>
+                </properties>
+            </pattern>
+            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#1">
+                <graphicalData x="404" y="142" width="75" height="69"/>
+                <properties>
+                    <property name="value" value="#['Hello, ' + message.inboundProperties.'http.request.path' + '. Today is ' + server.dateTime.format('dd/MM/yy') + '.' ]"/>
+                    <property name="auxiliary;index" value="5"/>
+                </properties>
+            </pattern>
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="File" type="http://www.mulesoft.org/schema/mule/file/endpoint" entity-id="357096d9-a8c0-4f08-a61e-d279ad597fd7">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="connector-ref" value=""/>
+                    <property name="address" value=""/>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
+                    <property name="mimeType" value=""/>
+                    <property name="outputPattern" value="#[message.id]"/>
+                    <property name="encoding" value=""/>
+                    <property name="disableTransportTransformer" value="false"/>
+                    <property name="path" value="src\main\resources\OutFile"/>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="tracking:enable-default-events" value="false"/>
+                    <property name="ref" value=""/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="businessEventsLabel" value=""/>
+                    <property name="updated"/>
+                    <property name="responseTimeout" value="10000"/>
+                </properties>
+                <description></description>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

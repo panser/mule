@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="Spell Checker">
+    <flow SubFlow="false" name="Spell_CheckerFlow1" entity-id="f1224748-b8c1-4a50-ac27-d7108abe9620">
+        <properties>
+            <property name="tracking:enable-default-events"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="processingStrategy2"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="File" type="org.mule.tooling.ui.modules.core.endpoint.fileEndpoint" entity-id="File#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="connector-ref" value=""/>
+                    <property name="address" value=""/>
+                    <property name="pollingFrequency" value="1000"/>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
+                    <property name="reverseOrder" value="false"/>
+                    <property name="moveToDirectory" value=""/>
+                    <property name="fileAge" value="500"/>
+                    <property name="mimeType" value=""/>
+                    <property name="encoding" value=""/>
+                    <property name="disableTransportTransformer" value="false"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="path" value="src\main\resources\InXML"/>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="comparator" value=""/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="tracking:enable-default-events" value="false"/>
+                    <property name="ref" value=""/>
+                    <property name="moveToPattern" value=""/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="businessEventsLabel" value=""/>
+                    <property name="updated"/>
+                    <property name="responseTimeout" value="10000"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern name="Echo" type="org.mule.tooling.ui.modules.core.pattern.echo" entity-id="Echo#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="auxiliary;index" value="3"/>
+                </properties>
+            </pattern>
+            <endpoint direction="Outbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="connector-ref"/>
+                    <property name="address"/>
+                    <property name="method"/>
+                    <property name="mimeType"/>
+                    <property name="encoding"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property name="httpLabel"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="path"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="password"/>
+                    <property name="keep-alive"/>
+                    <property name="port" value="80"/>
+                    <property name="followRedirects"/>
+                    <property name="host" value="spellcheck-service.cloudhub.io/spellcheck"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="transformer-refs"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="user"/>
+                    <property name="contentType"/>
+                    <property name="responseTimeout"/>
+                </properties>
+            </endpoint>
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="File" type="org.mule.tooling.ui.modules.core.endpoint.fileEndpoint" entity-id="File#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="connector-ref" value=""/>
+                    <property name="address" value=""/>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
+                    <property name="mimeType" value=""/>
+                    <property name="outputPattern" value="#[function:datestamp:dd-MM-yy]_#[function:systime]"/>
+                    <property name="encoding" value=""/>
+                    <property name="disableTransportTransformer" value="false"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="path" value="src\main\resources\OutXML"/>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="tracking:enable-default-events" value="false"/>
+                    <property name="ref" value=""/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="businessEventsLabel" value=""/>
+                    <property name="updated"/>
+                    <property name="responseTimeout" value="10000"/>
+                </properties>
+                <description></description>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

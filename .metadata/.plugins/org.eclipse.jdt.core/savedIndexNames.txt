@@ -1,0 +1,12 @@
+INDEX VERSION 1.127+C:\Users\Sergey\Eclipse\mule\.metadata\.plugins\org.eclipse.jdt.core
+2328269416.index
+332383186.index
+4205602535.index
+491026810.index
+3998674051.index
+1690891076.index
+964592086.index
+3713668.index
+4257325822.index
+3884134203.index
+2376816241.index

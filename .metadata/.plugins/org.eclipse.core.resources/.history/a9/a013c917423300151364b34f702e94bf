@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="Basic Tutorial">
+    <flow SubFlow="false" name="Basic_TutorialFlow1" entity-id="d921a73c-8cae-4eff-ab3e-d7fe2391a17d">
+        <properties>
+            <property name="tracking:enable-default-events"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="processingStrategy2"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
+                    <property name="mimeType" value=""/>
+                    <property name="path" value="*"/>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="responseTransformer-refs" value=""/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events" value="false"/>
+                    <property name="ref" value=""/>
+                    <property name="password" value=""/>
+                    <property name="keep-alive" value="false"/>
+                    <property name="host" value="localhost"/>
+                    <property name="auxiliary;erased;contentType" value="true"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="businessEventsLabel" value=""/>
+                    <property name="contentType" value=""/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="connector-ref" value=""/>
+                    <property name="address" value=""/>
+                    <property name="encoding" value=""/>
+                    <property name="httpLabel" value=""/>
+                    <property name="disableTransportTransformer" value="false"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="port" value="8084"/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="user" value=""/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="level" value="INFO"/>
+                    <property name="message" value="Current path is #[message.inboundProperties.'http.request.path']"/>
+                    <property name="category"/>
+                    <property name="auxiliary;index" value="3"/>
+                </properties>
+            </pattern>
+            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="value" value="#['Hello, ' + message.inboundProperties.'http.request.path' + '. Today is ' + server.dateTime.format('dd/MM/yy') + '.' ]"/>
+                    <property name="auxiliary;index" value="4"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

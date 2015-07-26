@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="Ajax Spell Checker">
+    <global-element name="Ajax" type="http://www.mulesoft.org/schema/mule/ajax/connector" entity-id="!!!d06cce19-5a21-410a-9032-302623838358">
+        <properties>
+            <property name="disableReplyTo" value="false"/>
+            <property name="storePassword" value=""/>
+            <property name="jsonCommented" value="true"/>
+            <property name="refsThreshold" value="1000"/>
+            <property name="maxInterval" value="30000"/>
+            <property name="timeout" value="10000"/>
+            <property name="resourceBase" value="src/main/app/docroot"/>
+            <property name="path" value=""/>
+            <property name="logLevel" value="0"/>
+            <property name="keyPassword" value=""/>
+            <property name="serverUrl" value="http://127.0.0.1:8090/Ajax"/>
+            <property name="name" value="Ajax"/>
+            <property name="property" value=""/>
+            <property name="interval" value="0"/>
+            <property name="multiFrameInterval" value="1500"/>
+            <property name="class" value=""/>
+            <property name="algorithm" value=""/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ajax/client;184224730">
+                <property name="storePassword" value=""/>
+                <property name="path" value=""/>
+                <property name="isProcessed$$$$" value="true"/>
+                <property name="class" value=""/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ajax/key-store;424620749">
+                <property name="storePassword" value=""/>
+                <property name="path" value=""/>
+                <property name="keyPassword" value=""/>
+                <property name="isProcessed$$$$" value="true"/>
+                <property name="class" value=""/>
+                <property name="algorithm" value=""/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ajax/protocol-handler;1948971965">
+                <property name="property" value=""/>
+                <property name="isProcessed$$$$" value="true"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ajax/server;1452905549">
+                <property name="storePassword" value=""/>
+                <property name="path" value=""/>
+                <property name="isProcessed$$$$" value="true"/>
+            </property-collection>
+        </properties>
+        <description></description>
+    </global-element>
+    <flow SubFlow="false" name="Ajax_Spell_CheckerFlow1" entity-id="aa9d0097-322a-41d8-8cbe-570acbeb6b8e">
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="d983d9a8-30ed-48e6-862c-a4f794c430db">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Ajax Channel" type="http://www.mulesoft.org/schema/mule/ajax/endpoint" entity-id="b678f1eb-6201-4c3a-9074-418c9fa1156f">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="connector-ref" value="Ajax"/>
+                    <property name="address" value=""/>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
+                    <property name="channel" value="/services/echo"/>
+                    <property name="mimeType" value=""/>
+                    <property name="encoding" value=""/>
+                    <property name="disableTransportTransformer" value="false"/>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="tracking:enable-default-events" value="false"/>
+                    <property name="ref" value=""/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="businessEventsLabel" value=""/>
+                    <property name="updated"/>
+                    <property name="responseTimeout" value="10000"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern name="Convert JS Object to XML" type="http://www.mulesoft.org/schema/mule/xml/object-to-xml-transformer" entity-id="b815dbde-add3-467d-a312-c883449c3444">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="returnClass" value=""/>
+                    <property name="driverClass" value=""/>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
+                    <property name="acceptMuleMessage" value="false"/>
+                    <property name="mimeType" value=""/>
+                    <property name="encoding" value=""/>
+                    <property name="updated"/>
+                    <property name="ignoreBadInput" value="false"/>
+                </properties>
+                <description>Convert JS Object to XML</description>
+            </pattern>
+            <pattern name="XSLT" type="http://www.mulesoft.org/schema/mule/xml/xslt-transformer" entity-id="2baf7fad-744f-4116-b40c-e44b4d774034">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+            </pattern>
+            <endpoint direction="Outbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/https/endpoint" entity-id="4c751548-23c5-4f0a-a607-4a5b4d7c92ed">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="exchange-pattern" value="request-response"/>
+                </properties>
+            </endpoint>
+            <pattern name="Echo" type="http://www.mulesoft.org/schema/mule/core/echo-component" entity-id="62391873-eab1-4aff-a103-9fdc8dbc6e42">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

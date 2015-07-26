@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-example-echo">
+    <flow SubFlow="false" name="EchoFlow" entity-id="bbeaf120-957b-4d00-a8a9-1ae277b88c6a">
+        <properties>
+            <property name="tracking:enable-default-events"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="processingStrategy2"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <pattern name="Java" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                <graphicalData x="19" y="190" width="68" height="69"/>
+                <properties>
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;wrapIn" value="3"/>
+                        <property name="class" value="ua.org.gostroy.mule_example_echo.service.Echo"/>
+                        <property name="auxiliary;index" value="3"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

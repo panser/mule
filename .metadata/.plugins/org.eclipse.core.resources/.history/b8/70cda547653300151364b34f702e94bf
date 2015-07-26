@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:stdio="http://www.mulesoft.org/schema/mule/stdio"
+	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/stdio http://www.mulesoft.org/schema/mule/stdio/current/mule-stdio.xsd http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+
+	<flow name="EchoComponent">
+        <component doc:name="Java">
+            <singleton-object class="ua.org.gostroy.mule_example_echo.service.Echo" />
+        </component>
+    </flow>
+    
+    <!-- Invoking the Flow -->
+	<flow name="EchoWebService" doc:name="EchoFlow">
+		<inbound-endpoint address="http://localhost:65082/services/EchoUMO1" exchange-pattern="request-response" doc:name="Generic"/>
+		<flow-ref name="EchoComponent"/>
+   	</flow>
+   	
+    <!-- Exposing as a Web Service with CXF -->
+	<flow name="EchoWebService" doc:name="EchoFlow">
+		<inbound-endpoint address="http://localhost:65082/services/EchoUMO2" exchange-pattern="request-response" doc:name="Generic"/>
+		<cxf:jaxws-service serviceClass="ua.org.gostroy.mule_example_echo.service.Echo" doc:name="SOAP"/>
+		<flow-ref name="EchoComponent"/>
+   	</flow>
+   	
+   	<!-- configure a connector if you want to override the default configuration used by the transport specified on an inbound endpoint -->
+   	<stdio:connector name="SystemStreamConnector" promptMessage="Please enter something: " messageDelayTime="1000"/>
+    <!-- Adding a STDIO endpoint: type something in console  -->
+   	<flow name="EchoStdio">
+        <stdio:inbound-endpoint system="IN" exchange-pattern="one-way"/> 
+        <flow-ref name="EchoComponent"/>
+        <stdio:outbound-endpoint system="OUT" exchange-pattern="one-way"/>
+    </flow>
+    
+
+<!--     <model name="echoSample">
+        <service name="EchoUMO">
+            <inbound>
+                <inbound-endpoint address="http://localhost:65082/services/EchoUMO"
+                                  exchange-pattern="request-response">
+                    <cxf:jaxws-service />                  
+                </inbound-endpoint>
+            </inbound>
+            <component>
+                <singleton-object class="org.mule.example.echo.Echo"/>
+            </component>
+        </service>
+    </model>
+ -->
+ </mule>
+

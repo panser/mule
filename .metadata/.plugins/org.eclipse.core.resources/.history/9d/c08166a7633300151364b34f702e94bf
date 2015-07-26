@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-example-echo">
+    <flow SubFlow="false" name="EchoFlow" entity-id="c9c92cad-4a08-490b-b2d3-af7917b826d4">
+        <properties>
+            <property name="tracking:enable-default-events"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="processingStrategy2"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Generic" type="http://www.mulesoft.org/schema/mule/core/endpoint" entity-id="Generic#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="connector-ref"/>
+                    <property name="address" value="http://localhost:65082/services/EchoUMO"/>
+                    <property name="mimeType"/>
+                    <property name="encoding"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="responseTimeout"/>
+                </properties>
+            </endpoint>
+            <pattern name="SOAP" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="SOAP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="serviceClass" value="ua.org.gostroy.mule_example_echo.service.Echo"/>
+                    <property name="configuration-ref"/>
+                    <property name="validationEnabled"/>
+                    <property name="mtomEnabled"/>
+                    <property name="onException"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="wsdlLocation"/>
+                    <property name="port"/>
+                    <property name="service"/>
+                    <property name="namespace"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-service"/>
+                    <property name="bindingId"/>
+                    <property name="enableMuleSoapHeaders"/>
+                    <property name="soapVersion"/>
+                </properties>
+            </pattern>
+            <pattern name="Java" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property name="auxiliary;wrapIn" value="5"/>
+                        <property name="class" value="ua.org.gostroy.mule_example_echo.service.Echo"/>
+                        <property name="auxiliary;index" value="5"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

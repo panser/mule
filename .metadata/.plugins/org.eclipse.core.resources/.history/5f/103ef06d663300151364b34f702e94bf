@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-example-echo">
+    <global-element name="STDIO" type="http://www.mulesoft.org/schema/mule/stdio/connector" entity-id="STDIO#1">
+        <properties>
+            <property name="promptMessageCode"/>
+            <property name="outputMessage"/>
+            <property name="dynamicNotification"/>
+            <property name="resourceBundle"/>
+            <property name="dispatcherPoolFactory-ref"/>
+            <property name="name" value="SystemStreamConnector"/>
+            <property name="validateConnections"/>
+            <property name="messageDelayTime" value="1000"/>
+            <property name="promptMessage" value="Please enter something: "/>
+            <property name="outputMessageCode"/>
+            <property name="auxiliary;index" value="11"/>
+        </properties>
+    </global-element>
+    <global-unknown description="false" unknownName="echoSampleService" index="16" entity-id="global-unknown#1">
+        <content>&lt;model xmlns="http://www.mulesoft.org/schema/mule/core" name="echoSampleService"&gt;
+        &lt;service name="EchoUMOService"&gt;
+            &lt;inbound&gt;
+                &lt;inbound-endpoint address="http://localhost:65082/services/EchoUMO3" exchange-pattern="request-response"&gt;
+                    &lt;cxf:jaxws-service xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"/&gt;                  
+                &lt;/inbound-endpoint&gt;
+            &lt;/inbound&gt;
+            &lt;component&gt;
+                &lt;singleton-object class="ua.org.gostroy.mule_example_echo.service.Echo"/&gt;
+            &lt;/component&gt;
+            &lt;!-- &lt;flow-ref name="EchoComponent"/&gt; --&gt;
+        &lt;/service&gt;
+    &lt;/model&gt;</content>
+    </global-unknown>
+    <global-unknown description="false" unknownName="echoSample" index="23" entity-id="global-unknown#2">
+        <content>&lt;model xmlns="http://www.mulesoft.org/schema/mule/core" name="echoSample"&gt;
+        &lt;service name="EchoUMO"&gt;
+            &lt;inbound&gt;
+                &lt;inbound-endpoint address="http://localhost:65082/services/EchoUMO" exchange-pattern="request-response"&gt;
+                    &lt;cxf:jaxws-service xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"/&gt;                  
+                &lt;/inbound-endpoint&gt;
+            &lt;/inbound&gt;
+            &lt;component&gt;
+                &lt;singleton-object class="ua.org.gostroy.mule_example_echo.service.Echo"/&gt;
+            &lt;/component&gt;
+        &lt;/service&gt;
+    &lt;/model&gt;</content>
+    </global-unknown>
+    <flow SubFlow="false" name="EchoComponent" entity-id="d5dfd659-880e-4177-8fff-005db6685502">
+        <properties>
+            <property name="tracking:enable-default-events"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="processingStrategy2"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <pattern name="Java" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property name="auxiliary;wrapIn" value="3"/>
+                        <property name="class" value="ua.org.gostroy.mule_example_echo.service.Echo"/>
+                        <property name="auxiliary;index" value="3"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="EchoWeb" entity-id="505993e2-1c20-4c2a-a651-c84efddfdf07">
+        <properties>
+            <property name="tracking:enable-default-events"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="processingStrategy2"/>
+            <property name="auxiliary;index" value="4"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Generic" type="http://www.mulesoft.org/schema/mule/core/endpoint" entity-id="Generic#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="connector-ref"/>
+                    <property name="address" value="http://localhost:65082/services/EchoUMO1"/>
+                    <property name="mimeType"/>
+                    <property name="encoding"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="responseTimeout"/>
+                </properties>
+            </endpoint>
+            <pattern name="Flow Reference" type="http://www.mulesoft.org/schema/mule/core/flow-ref" entity-id="Flow Reference#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="name" value="EchoComponent"/>
+                    <property name="auxiliary;index" value="6"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="EchoWebService" entity-id="ee34bae1-1d89-4b28-85b7-776ac8fab4a8">
+        <properties>
+            <property name="tracking:enable-default-events"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="processingStrategy2"/>
+            <property name="auxiliary;index" value="7"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Generic" type="http://www.mulesoft.org/schema/mule/core/endpoint" entity-id="Generic#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="connector-ref"/>
+                    <property name="address" value="http://localhost:65082/services/EchoUMO2"/>
+                    <property name="mimeType"/>
+                    <property name="encoding"/>
+                    <property name="auxiliary;index" value="8"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="responseTimeout"/>
+                </properties>
+            </endpoint>
+            <pattern name="SOAP" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="SOAP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="serviceClass" value="ua.org.gostroy.mule_example_echo.service.Echo"/>
+                    <property name="configuration-ref"/>
+                    <property name="validationEnabled"/>
+                    <property name="mtomEnabled"/>
+                    <property name="onException"/>
+                    <property name="auxiliary;index" value="9"/>
+                    <property name="wsdlLocation"/>
+                    <property name="port"/>
+                    <property name="service"/>
+                    <property name="namespace"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-service"/>
+                    <property name="bindingId"/>
+                    <property name="enableMuleSoapHeaders"/>
+                    <property name="soapVersion"/>
+                </properties>
+            </pattern>
+            <pattern name="Flow Reference" type="http://www.mulesoft.org/schema/mule/core/flow-ref" entity-id="Flow Reference#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="name" value="EchoComponent"/>
+                    <property name="auxiliary;index" value="10"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="EchoStdio" entity-id="c10ad27e-11c1-4a33-99b1-142aeaf6a7cd">
+        <properties>
+            <property name="tracking:enable-default-events"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="processingStrategy2"/>
+            <property name="auxiliary;index" value="12"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="STDIO" type="http://www.mulesoft.org/schema/mule/stdio/endpoint" entity-id="STDIO#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="connector-ref"/>
+                    <property name="address"/>
+                    <property name="mimeType"/>
+                    <property name="encoding"/>
+                    <property name="auxiliary;index" value="13"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="system" value="IN"/>
+                    <property name="transformer-refs"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="responseTimeout"/>
+                </properties>
+            </endpoint>
+            <pattern name="Flow Reference" type="http://www.mulesoft.org/schema/mule/core/flow-ref" entity-id="Flow Reference#3">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="name" value="EchoComponent"/>
+                    <property name="auxiliary;index" value="14"/>
+                </properties>
+            </pattern>
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="STDIO" type="http://www.mulesoft.org/schema/mule/stdio/endpoint" entity-id="STDIO#3">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="connector-ref"/>
+                    <property name="address"/>
+                    <property name="mimeType"/>
+                    <property name="encoding"/>
+                    <property name="auxiliary;index" value="15"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="system" value="OUT"/>
+                    <property name="transformer-refs"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="responseTimeout"/>
+                </properties>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

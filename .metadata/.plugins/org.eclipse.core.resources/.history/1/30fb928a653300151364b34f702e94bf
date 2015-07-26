@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-project xmlns="http://www.mulesoft.com/tooling/project" runtimeId="org.mule.tooling.server.3.4.EE">
+    <name>mule-example-echo</name>
+    <description>for test: &#xD;
+&#xD;
+http://localhost:65082/services/EchoUMO/echo/text/hello&#xD;
+http://localhost:65082/services/EchoUMO?wsdl</description>
+</mule-project>
